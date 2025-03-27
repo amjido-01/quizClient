@@ -5,12 +5,33 @@ import { useRouter, useParams } from "next/navigation"
 import { Brain, Clock, ArrowRight } from 'lucide-react'
 import { Progress } from "@/components/ui/progress"
 
+
+export interface Question {
+  id: string;
+  quizId: string;
+  text: string;
+  type: string;
+  options: string[];
+  correctAnswer: string;
+  createdAt: string;
+}
+
+export interface Quiz {
+  id: string;
+  title: string;
+  topicId: string;
+  difficulty: "easy" | "medium" | "hard";
+  createdAt: string;
+  questions: Question[];
+}
+
+
 const QuizPage = () => {
   const { id } = useParams()
   const router = useRouter()
-  const [quiz, setQuiz] = useState(null)
+  const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [selectedAnswer, setSelectedAnswer] = useState(null)
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0)
 
   useEffect(() => {
@@ -20,6 +41,7 @@ const QuizPage = () => {
         if (!response.ok) throw new Error("Failed to load quiz")
 
         const quizData = await response.json()
+        console.log(quizData, "hello")
         setQuiz(quizData)
       } catch (error) {
         console.error("Error fetching quiz:", error)
@@ -31,6 +53,7 @@ const QuizPage = () => {
     }
   }, [id])
 
+  console.log(quiz, "all")
   if (!quiz) {
     return (
       <div className="min-h-screen bg-[#F8F7FF] flex flex-col items-center justify-center">
@@ -40,10 +63,11 @@ const QuizPage = () => {
     )
   }
 
-  const currentQuestion = quiz.questions[currentQuestionIndex]
+  const currentQuestion = quiz?.questions[currentQuestionIndex]
+  console.log(currentQuestion)
   const progress = ((currentQuestionIndex + 1) / quiz.questions.length) * 100
 
-  const handleAnswerSelect = (answer) => {
+  const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer)
   }
 

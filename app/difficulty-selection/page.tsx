@@ -142,7 +142,7 @@ export default function SubcategorySelection() {
       <main className="flex-1">
         {/* Header Section */}
         <section className="py-8 border-b">
-          <div className="container px-4 md:px-6">
+          <div className="containe px-4 md:px-6">
             <Button variant="ghost" className="mb-4 pl-0 flex items-center gap-2" onClick={handleBack}>
               <ArrowLeft className="h-4 w-4" /> Back to Categories
             </Button>
@@ -156,7 +156,7 @@ export default function SubcategorySelection() {
 
         {/* Subcategory Selection */}
         <section className="py-8 border-b">
-          <div className="container px-4 md:px-6">
+          <div className="containe px-4 md:px-6">
             <div className="mb-6">
               <h2 className="text-2xl font-bold">Select Topic</h2>
               <p className="text-muted-foreground">Choose a specific area to test your knowledge</p>
@@ -203,7 +203,7 @@ export default function SubcategorySelection() {
 
         {/* Difficulty Selection */}
         <section className="py-8">
-          <div className="container px-4 md:px-6">
+          <div className="containe px-4 md:px-6">
             <div className="mb-6">
               <h2 className="text-2xl font-bold">Select Difficulty Level</h2>
               <p className="text-muted-foreground">Choose how challenging you want your quiz to be</p>

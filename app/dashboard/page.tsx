@@ -102,7 +102,7 @@ export default function Dashboard() {
       <main className="flex-1">
         {/* Welcome Section */}
         <section className="py-8">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="containe mx-auto px-4 md:px-6">
             <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
               <div>
                 <h1 className="text-3xl font-bold">Welcome back, John!</h1>
@@ -123,7 +123,7 @@ export default function Dashboard() {
 
         {/* Search Section */}
         <section className="py-6 border-b">
-          <div className="container px-4 md:px-6">
+          <div className="containe px-4 md:px-6">
             <div className="mx-auto max-w-2xl">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -141,7 +141,7 @@ export default function Dashboard() {
 
         {/* Categories Section */}
         <section className="py-12">
-          <div className="container px-4 md:px-6">
+          <div className="containe px-4 md:px-6">
             <div className="mb-8">
               <h2 className="text-2xl font-bold">Quiz Categories</h2>
               <p className="text-muted-foreground">Select a category to test your knowledge</p>
@@ -228,7 +228,7 @@ export default function Dashboard() {
 
         {/* Recent Activity Section */}
         <section className="py-12 bg-muted/30">
-          <div className="container px-4 md:px-6">
+          <div className="containe px-4 md:px-6">
             <div className="mb-8">
               <h2 className="text-2xl font-bold">Recent Activity</h2>
               <p className="text-muted-foreground">Your recent quiz attempts and achievements</p>
