@@ -12,17 +12,17 @@ export default function LandingPage() {
       <header className="border-2 p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-primary" />
-            <span className="text-lg font-medium text-primary">QuizMaster</span>
+            <Brain className="h-6 w-6 text-[#6C5CE7]" />
+            <span className="text-xl font-medium text-[#6C5CE7]">QuizMaster</span>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/login">
-              <Button variant="ghost" className="text-primary hover:text-primary/90 hover:bg-primary/5">
+              <Button variant="ghost" className="text-[#6C5CE7] hover:text-[#8b82d1] hover:bg-primary/5">
                 Login
               </Button>
             </Link>
             <Link href="/register">
-              <Button className="bg-primary hover:bg-primary/90 text-white">Sign Up</Button>
+              <Button className="bg-[#6C5CE7] hover:bg-[#8b82d1] text-white">Sign Up</Button>
             </Link>
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function LandingPage() {
           <h1 className="text-2xl font-semibold tracking-tight">Mastering Any Subject Through Quizzes</h1>
           <p className="text-sm text-muted-foreground">Challenge yourself, learn, and compete with others</p>
           <Link href="/register">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
+            <Button size="lg" className="bg-[#6C5CE7] hover:bg-[#8b82d1] text-white">
               Start Learning
             </Button>
           </Link>
