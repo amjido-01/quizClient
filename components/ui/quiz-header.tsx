@@ -13,10 +13,24 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useAuthStore } from "@/hooks/use-auth"
 import { Brain } from 'lucide-react'
+import {User} from "@/types/index"
 
-export default function QuizHeader() {
+interface QuizHeaderProps {
+  user: User | null; // Use the imported UserData interface
+}
+
+export default function QuizHeader({user}: QuizHeaderProps) {
   const {logout} = useAuthStore()
   const router = useRouter()
+  let initials = "??"; 
+
+  if (user && user.username) {
+    const parts = user.username.split(" "); // Split username at spaces
+    initials = parts
+      .map((part) => part.charAt(0).toUpperCase()) // Get first letter of each part
+      .slice(0, 2) // Take only the first two initials
+      .join(""); // Join the initials
+  }
 
   
   const handleLogout = async () => {
@@ -42,7 +56,7 @@ export default function QuizHeader() {
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="/placeholder.svg" alt="User" />
-                  <AvatarFallback>JD</AvatarFallback>
+                  <AvatarFallback className="text-[#6C5CE7]">{initials}</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>

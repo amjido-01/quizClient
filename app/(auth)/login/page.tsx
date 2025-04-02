@@ -66,8 +66,8 @@ export default function LoginPage() {
         <div className="mx-auto w-full max-w-md space-y-6">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Link href="/" className="flex items-center gap-2">
-              <Brain className="h-6 w-6 text-accent" />
-              <span className="text-xl font-bold">QuizMaster</span>
+              <Brain className="h-6 w-6 text-[#6C5CE7]" />
+              <span className="text-xl font-bold text-[#6C5CE7]">QuizMaster</span>
             </Link>
             <h1 className="text-3xl font-bold">Welcome back</h1>
             <p className="text-muted-foreground">
@@ -105,7 +105,7 @@ export default function LoginPage() {
             </div>
             <Button 
              disabled={isLoading}
-            type="submit" className="w-full">
+            type="submit" className="w-full bg-[#6C5CE7] hover:bg-[#8b82d1] text-white">
               {isLoading ? (
               <motion.div
                 animate={{ rotate: 360 }}
@@ -124,7 +124,7 @@ export default function LoginPage() {
             Don&apos;t have an account?{" "}
             <Link
               href="/register"
-              className="font-medium text-primary underline underline-offset-4"
+              className="font-medium text-[#6C5CE7] underline underline-offset-4"
             >
               Sign up
             </Link>

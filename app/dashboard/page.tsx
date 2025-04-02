@@ -21,7 +21,9 @@ import {
   Languages,
   Dumbbell,
   ArrowRight,
+  Slice,
 } from "lucide-react"
+import { useAuthStore } from "@/hooks/use-auth"
 import QuizHeader from "@/components/ui/quiz-header"
 
 export default function Dashboard() {
@@ -31,6 +33,9 @@ export default function Dashboard() {
     { name: string; slug: string; icon: JSX.Element; description: string; quizCount?: number }[]
   >([])
   const router = useRouter()
+  const {user} = useAuthStore()
+
+  // console.log(user, "from use")
 
   // Fetch categories from backend
   useEffect(() => {
@@ -63,14 +68,10 @@ export default function Dashboard() {
             })),
           )
         } else {
-          // Fallback to sample categories if API format is unexpected
-          setCategories(sampleCategories)
           console.error("Unexpected API response format:", data)
         }
       } catch (error) {
         console.error("Error fetching categories:", error)
-        // Fallback to sample categories if API fails
-        setCategories(sampleCategories)
       }
     }
     fetchCategories()
@@ -97,7 +98,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <QuizHeader />
+      <QuizHeader user={user} />
 
       <main className="flex-1">
         {/* Welcome Section */}
@@ -105,14 +106,11 @@ export default function Dashboard() {
           <div className="containe mx-auto px-4 md:px-6">
             <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
               <div>
-                <h1 className="text-3xl font-bold">Welcome back, John!</h1>
+                <h1 className="text-3xl font-bold capitalize">Welcome back, {user?.username}</h1>
                 <p className="text-muted-foreground">Ready to challenge your knowledge today?</p>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-                  <Brain className="h-4 w-4" />
-                  <span>Level 5 Quiz Master</span>
-                </div>
+              
                 <div className="flex items-center gap-1 rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">
                   <span>125 Points</span>
                 </div>
@@ -163,7 +161,7 @@ export default function Dashboard() {
                       className={`flex h-12 w-12 items-center justify-center rounded-full ${
                         selectedCategory === category.slug
                           ? "bg-primary text-primary-foreground"
-                          : "bg-primary/10 text-primary"
+                          : "bg-primary/10 text-[#6C5CE7]"
                       }`}
                     >
                       {category.icon}
@@ -175,7 +173,7 @@ export default function Dashboard() {
                       {category.description || `Test your knowledge in ${category.name}`}
                     </CardDescription>
                   </CardContent>
-                  <CardFooter className="p-4 border-t bg-muted/20">
+                  {/* <CardFooter className="p-4 border-t bg-muted/20">
                     <div className="flex w-full items-center justify-between">
                       <span className="text-sm text-muted-foreground">{category.quizCount} quizzes</span>
                       {selectedCategory === category.slug && (
@@ -184,7 +182,7 @@ export default function Dashboard() {
                         </div>
                       )}
                     </div>
-                  </CardFooter>
+                  </CardFooter> */}
                 </Card>
               ))}
             </div>
@@ -316,38 +314,6 @@ export default function Dashboard() {
     </div>
   )
 }
-
-// Sample categories as fallback if API fails
-const sampleCategories = [
-  {
-    name: "Science",
-    slug: "science",
-    description: "Test your knowledge of scientific principles and discoveries",
-    quizCount: 24,
-    icon: <Science className="h-5 w-5" />,
-  },
-  {
-    name: "Mathematics",
-    slug: "mathematics",
-    description: "Challenge yourself with math problems and concepts",
-    quizCount: 18,
-    icon: <Calculator className="h-5 w-5" />,
-  },
-  {
-    name: "History",
-    slug: "history",
-    description: "Explore historical events, figures, and time periods",
-    quizCount: 18,
-    icon: <History className="h-5 w-5" />,
-  },
-  {
-    name: "Geography",
-    slug: "geography",
-    description: "Test your knowledge about countries, capitals, and landmarks",
-    quizCount: 15,
-    icon: <Globe className="h-5 w-5" />,
-  },
-]
 
 const recentQuizzes = [
   {
