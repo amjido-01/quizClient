@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react"
 import { useRouter, useParams } from "next/navigation"
 import { Brain, Clock, ArrowRight } from 'lucide-react'
-import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/progress";
+import withAuth from "@/components/ui/withAuth";
 
 
 export interface Question {
@@ -166,4 +167,4 @@ const QuizPage = () => {
   )
 }
 
-export default QuizPage
+export default withAuth(QuizPage)

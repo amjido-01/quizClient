@@ -9,6 +9,7 @@ export interface User {
   }
 
   export interface RecentQuiz {
+    id: string;
     title: string;
     topic: string;
     category: string;

@@ -289,12 +289,13 @@ export default function Dashboard() {
                                                                                   month: "long",
                                                                                   day: "numeric",
                                                                                 })}
-
                           </p>
                         </div>
-                        <Button variant="ghost" size="sm">
-                          View
-                        </Button>
+                        <Link href={`/recent/${quiz.id}`}>
+                          <Button variant="ghost" size="sm">
+                            View
+                          </Button>
+                        </Link>
                       </div>
                     ))}
                   </div>
