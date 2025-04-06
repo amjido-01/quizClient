@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -22,9 +22,11 @@ import {
   ActivityIcon as Function,
 } from "lucide-react"
 import QuizHeader from "@/components/ui/quiz-header"
+import { useAuthStore } from "@/hooks/use-auth"
 
 export default function SubcategorySelection() {
   const router = useRouter()
+  const {user} = useAuthStore()
   const searchParams = useSearchParams()
   const category = searchParams.get("category")
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null)
@@ -83,32 +85,77 @@ export default function SubcategorySelection() {
   }
 
 
-  const handleStartQuiz = async () => {
-    console.log(category, selectedDifficulty, selectedSubcategory)
-    if (!category || !selectedSubcategory || !selectedDifficulty) return
+  // const handleStartQuiz = async () => {
+  //   console.log(category, selectedDifficulty, selectedSubcategory)
+  //   if (!category || !selectedSubcategory || !selectedDifficulty) return
 
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8080/api/v1/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`,
+  //     )
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch quiz questions")
+  //     }
+
+  //     const quizData = await response.json()
+
+  //     if (!quizData || quizData.length === 0) {
+  //       console.error("No quiz data available")
+  //       return
+  //     }
+
+  //     router.push(`/quiz/${quizData[0].id}`)
+  //   } catch (error) {
+  //     console.error("Error starting quiz:", error)
+  //   }
+  // }
+
+  const handleStartQuiz = async () => {
+    console.log(category, selectedDifficulty, selectedSubcategory);
+    if (!category || !selectedSubcategory || !selectedDifficulty) return;
+  
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`,
-      )
-      console.log(response.url, "res")  
-
+        `http://localhost:8080/api/v1/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`
+      );
+  
       if (!response.ok) {
-        throw new Error("Failed to fetch quiz questions")
+        throw new Error("Failed to fetch quiz questions");
       }
-
-      const quizData = await response.json()
-
+  
+      const quizData = await response.json();
+  
       if (!quizData || quizData.length === 0) {
-        console.error("No quiz data available")
-        return
+        console.error("No quiz data available");
+        return;
       }
-
-      router.push(`/quiz/${quizData[0].id}`)
+  
+      const quizId = quizData[0].id;
+  
+      // Create quiz attempt
+      const attemptResponse = await fetch("http://localhost:8080/api/v1/attempt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user?.id, quizId }),
+      });
+  
+      if (!attemptResponse.ok) {
+        throw new Error("Failed to create quiz attempt");
+      }
+  
+      const attemptData = await attemptResponse.json();
+      console.log(attemptData, 'attempt')
+  
+      // Navigate to the quiz page with the attempt ID
+      router.push(`/quiz/${quizId}?attemptId=${attemptData.id}`);
     } catch (error) {
-      console.error("Error starting quiz:", error)
+      console.error("Error starting quiz:", error);
     }
-  }
+  };
+  
 
   const handleBack = () => {
     router.back()
@@ -137,7 +184,7 @@ export default function SubcategorySelection() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <QuizHeader />
+      <QuizHeader user={user}/>
 
       <main className="flex-1">
         {/* Header Section */}
@@ -177,8 +224,8 @@ export default function SubcategorySelection() {
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-full ${
                         selectedSubcategory === subcategory.slug
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-primary/10 text-primary"
+                          ? "bg-[#6C5CE7]  text-white"
+                          : "bg-primary/10 text-[#6C5CE7]"
                       }`}
                     >
                       {subcategory.icon}
@@ -187,14 +234,15 @@ export default function SubcategorySelection() {
                   </CardHeader>
                   <CardContent className="p-4">
                     <CardDescription>{subcategory.description}</CardDescription>
-                  </CardContent>
-                  <CardFooter className="p-4 border-t bg-muted/20">
+                    <div className="w-1/2 mt-2">
                     {selectedSubcategory === subcategory.slug && (
                       <div className="flex items-center justify-center rounded-full bg-primary/10 px-2 py-1">
                         <span className="text-xs font-medium text-primary">Selected</span>
                       </div>
                     )}
-                  </CardFooter>
+                    </div>
+                  </CardContent>
+                  
                 </Card>
               ))}
             </div>
@@ -224,8 +272,8 @@ export default function SubcategorySelection() {
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-full ${
                         selectedDifficulty === difficulty.level
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-primary/10 text-primary"
+                          ? "bg-[#6C5CE7]  text-white"
+                          : "bg-primary/10  text-[#6C5CE7]"
                       }`}
                     >
                       {difficulty.icon}

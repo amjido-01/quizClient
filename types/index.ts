@@ -1,20 +1,3 @@
-
-
-
-export interface Interest {
-    id: number
-    interest: string
-    userId: string
-  }
-
-  export interface Notification {
-    id: string
-    productName: string
-    message: string
-    createdAt: string
-    sent: boolean
-  }
-
 export interface User {
     id: number;
     email: string;
@@ -23,6 +6,13 @@ export interface User {
     frequency: string;
     createdAt: string;
     updatedAt: string;
-    interest: Interest[];
-    notifications: Notification[]
   }
+
+  export interface RecentQuiz {
+    title: string;
+    topic: string;
+    category: string;
+    score: number;
+    date: string; // or `Date` if you're converting it on the frontend
+  }
+  

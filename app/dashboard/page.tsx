@@ -25,6 +25,8 @@ import {
 } from "lucide-react"
 import { useAuthStore } from "@/hooks/use-auth"
 import QuizHeader from "@/components/ui/quiz-header"
+import api from "../api/axiosConfig"
+import { RecentQuiz } from "@/types"
 
 export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -32,17 +34,19 @@ export default function Dashboard() {
   const [categories, setCategories] = useState<
     { name: string; slug: string; icon: JSX.Element; description: string; quizCount?: number }[]
   >([])
+  const [recentQuizzes, setRecentQuizzes] = useState<RecentQuiz[]>([]);
+
   const router = useRouter()
   const {user} = useAuthStore()
 
-  // console.log(user, "from use")
+  console.log(user, "from use")
 
   // Fetch categories from backend
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/v1/quizzes/categories")
-        const data = await response.json()
+        const response = await api.get("/quizzes/categories")
+        const data = await response.data
         console.log(data, "data from dashboard")
         const categoryIcons: Record<string, JSX.Element> = {
           math: <Calculator className="h-5 w-5" />,
@@ -76,6 +80,31 @@ export default function Dashboard() {
     }
     fetchCategories()
   }, [])
+
+
+  useEffect(() => {
+    const fetchRecentQuizzes = async () => {
+      if (!user?.id) return; // Ensure user is logged in
+  
+      try {
+        const response = await api.get("/quizzes/recent")
+        const data = await response.data
+  
+        if (Array.isArray(data.recentQuizzes)) {
+          setRecentQuizzes(data.recentQuizzes);
+        } else {
+          console.error("Unexpected response format", data);
+        }
+      } catch (error) {
+        console.error("Error fetching recent quizzes:", error);
+      }
+    };
+  
+    fetchRecentQuizzes();
+  }, [user?.id]); // Refetch when user ID changes
+  
+
+  console.log(recentQuizzes, "recents")
 
   // Filter categories based on search query
   const filteredCategories = categories.filter(
@@ -160,7 +189,7 @@ export default function Dashboard() {
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-full ${
                         selectedCategory === category.slug
-                          ? "bg-primary text-primary-foreground"
+                          ? "bg-[#6C5CE7]  text-white"
                           : "bg-primary/10 text-[#6C5CE7]"
                       }`}
                     >
@@ -255,7 +284,12 @@ export default function Dashboard() {
                         <div className="flex-1">
                           <p className="font-medium">{quiz.title}</p>
                           <p className="text-sm text-muted-foreground">
-                            {quiz.category} • {quiz.date}
+                            {quiz.category} • {new Date(quiz.date).toLocaleDateString("en-US", {
+                                                                                  year: "numeric",
+                                                                                  month: "long",
+                                                                                  day: "numeric",
+                                                                                })}
+
                           </p>
                         </div>
                         <Button variant="ghost" size="sm">
@@ -275,7 +309,7 @@ export default function Dashboard() {
                   <div className="space-y-4">
                     {achievements.map((achievement, index) => (
                       <div key={index} className="flex items-center gap-4 rounded-lg border p-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-[#6C5CE7]">
                           {achievement.icon}
                         </div>
                         <div className="flex-1">
@@ -315,32 +349,6 @@ export default function Dashboard() {
   )
 }
 
-const recentQuizzes = [
-  {
-    title: "Basic Science Quiz",
-    category: "Science",
-    score: 85,
-    date: "Today",
-  },
-  {
-    title: "World Geography Challenge",
-    category: "Geography",
-    score: 65,
-    date: "Yesterday",
-  },
-  {
-    title: "Math Fundamentals",
-    category: "Mathematics",
-    score: 90,
-    date: "3 days ago",
-  },
-  {
-    title: "History of Ancient Civilizations",
-    category: "History",
-    score: 35,
-    date: "Last week",
-  },
-]
 
 const achievements = [
   {
