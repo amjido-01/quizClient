@@ -87,7 +87,7 @@ export default function Dashboard() {
       if (!user?.id) return; // Ensure user is logged in
   
       try {
-        const response = await api.get("/quizzes/recent")
+        const response = await api.get("/recent")
         const data = await response.data
   
         if (Array.isArray(data.recentQuizzes)) {
@@ -266,7 +266,11 @@ export default function Dashboard() {
                 <CardHeader>
                   <CardTitle>Recent Quizzes</CardTitle>
                 </CardHeader>
-                <CardContent>
+                {recentQuizzes.length === 0 ? (<div className="px-6">
+                  <p className="text-sm text-muted-foreground">
+                  You haven't taken any quizzes yet.
+                  </p>
+        </div>)  : (<CardContent>
                   <div className="space-y-4">
                     {recentQuizzes.map((quiz, index) => (
                       <div key={index} className="flex items-center gap-4 rounded-lg border p-3">
@@ -299,7 +303,7 @@ export default function Dashboard() {
                       </div>
                     ))}
                   </div>
-                </CardContent>
+                </CardContent>)}
               </Card>
 
               <Card>

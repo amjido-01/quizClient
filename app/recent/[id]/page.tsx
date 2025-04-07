@@ -40,15 +40,12 @@ const Page = () => {
       try {
         // In a real app, you would fetch this data from your API
         // For now, we'll simulate a delay and use mock data
-        const response = await api.get(`/quizzes/recent/${id}`)
+        const response = await api.get(`/recent/${id}`)
+        const data = response.data
         console.log(response.data, "from recent")
-        await new Promise((resolve) => setTimeout(resolve, 800))
 
-        // Find the quiz in our mock data
-        const quiz = mockQuizHistory.find((q) => q.id === id)
-
-        if (quiz) {
-          setQuizData(quiz)
+        if (data) {
+          setQuizData(data)
         } else {
           // If quiz not found, use the first one as fallback
           setQuizData(mockQuizHistory[0])
@@ -197,7 +194,7 @@ const Page = () => {
               </CardFooter>
             </Card>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            {/* <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="summary">Summary</TabsTrigger>
                 <TabsTrigger value="questions">Questions & Answers</TabsTrigger>
@@ -330,7 +327,7 @@ const Page = () => {
                   </Card>
                 ))}
               </TabsContent>
-            </Tabs>
+            </Tabs> */}
           </div>
         </div>
       </main>
