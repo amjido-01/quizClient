@@ -119,12 +119,14 @@ export default function SubcategorySelection() {
       const response = await fetch(
         `http://localhost:8080/api/v1/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`
       );
-  
+      
+      console.log(response, "kaiiiii")
       if (!response.ok) {
         throw new Error("Failed to fetch quiz questions");
       }
   
       const quizData = await response.json();
+      console.log(quizData, "wetin")
   
       if (!quizData || quizData.length === 0) {
         console.error("No quiz data available");
@@ -165,19 +167,19 @@ export default function SubcategorySelection() {
     {
       name: "Easy",
       level: "easy",
-      description: "Perfect for beginners. Basic questions to test your fundamental knowledge.",
+      description: "Perfect for beginners.",
       icon: <Shield className="h-5 w-5" />,
     },
     {
       name: "Medium",
       level: "medium",
-      description: "For those with good knowledge. More challenging questions that require deeper understanding.",
+      description: "For those with good knowledge.",
       icon: <Trophy className="h-5 w-5" />,
     },
     {
       name: "Hard",
       level: "hard",
-      description: "For experts only. Complex questions that will truly test your mastery of the subject.",
+      description: "For experts only.",
       icon: <Zap className="h-5 w-5" />,
     },
   ]
@@ -215,7 +217,7 @@ export default function SubcategorySelection() {
                   key={subcategory.slug}
                   className={`cursor-pointer transition-all duration-200 ${
                     selectedSubcategory === subcategory.slug
-                      ? "border-primary bg-primary/5 shadow-md"
+                      ? "border-[#6C5CE7] bg-[#dee0fd] shadow-md"
                       : "hover:border-primary/30 hover:shadow-sm"
                   }`}
                   onClick={() => setSelectedSubcategory(subcategory.slug)}
@@ -256,7 +258,7 @@ export default function SubcategorySelection() {
                   key={difficulty.level}
                   className={`cursor-pointer transition-all duration-200 ${
                     selectedDifficulty === difficulty.level
-                      ? "border-primary bg-primary/5 shadow-md"
+                      ? "border-[#6C5CE7] bg-[#dee0fd] shadow-md"
                       : "hover:border-primary/30 hover:shadow-sm"
                   }`}
                   onClick={() => setSelectedDifficulty(difficulty.level)}
@@ -281,7 +283,7 @@ export default function SubcategorySelection() {
             </div>
 
             {/* Start Quiz Button */}
-            <div className="mt-12 flex justify-center">
+            <div className="mt-12 flex justify-end">
               <Button
                 size="lg"
                 className="px-8 py-6 text-lg bg-[#6C5CE7] hover:bg-[#6C5CE7]/90 gap-2"
@@ -291,19 +293,6 @@ export default function SubcategorySelection() {
                 Start Quiz <ArrowRight className="h-5 w-5" />
               </Button>
             </div>
-
-            {selectedSubcategory && selectedDifficulty && (
-              <div className="mt-4 text-center text-sm text-muted-foreground">
-                You've selected a{" "}
-                <span className="font-medium text-primary">
-                  {difficulties.find((d) => d.level === selectedDifficulty)?.name}
-                </span>{" "}
-                quiz in{" "}
-                <span className="font-medium text-primary">
-                  {subcategories.find((s) => s.slug === selectedSubcategory)?.name}
-                </span>
-              </div>
-            )}
           </div>
         </section>
       </main>
