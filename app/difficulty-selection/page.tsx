@@ -23,7 +23,7 @@ import {
 } from "lucide-react"
 import QuizHeader from "@/components/ui/quiz-header"
 import { useAuthStore } from "@/hooks/use-auth"
-
+import Footer from "@/components/ui/Footer"
 export default function SubcategorySelection() {
   const router = useRouter()
   const {user} = useAuthStore()
@@ -186,7 +186,7 @@ export default function SubcategorySelection() {
     <div className="flex min-h-screen flex-col">
       <QuizHeader user={user}/>
 
-      <main className="flex-1">
+      <main className="flex-1 w-[95%] mx-auto">
         {/* Header Section */}
         <section className="py-8 border-b">
           <div className="containe px-4 md:px-6">
@@ -234,13 +234,6 @@ export default function SubcategorySelection() {
                   </CardHeader>
                   <CardContent className="p-4">
                     <CardDescription>{subcategory.description}</CardDescription>
-                    <div className="w-1/2 mt-2">
-                    {selectedSubcategory === subcategory.slug && (
-                      <div className="flex items-center justify-center rounded-full bg-primary/10 px-2 py-1">
-                        <span className="text-xs font-medium text-primary">Selected</span>
-                      </div>
-                    )}
-                    </div>
                   </CardContent>
                   
                 </Card>
@@ -314,18 +307,7 @@ export default function SubcategorySelection() {
           </div>
         </section>
       </main>
-
-      <footer className="w-full border-t py-6">
-        <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-          <div className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-primary" />
-            <span className="font-semibold">QuizMaster</span>
-          </div>
-          <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} QuizMaster. All rights reserved.
-          </p>
-        </div>
-      </footer>
+          <Footer />
     </div>
   )
 }

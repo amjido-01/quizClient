@@ -64,13 +64,14 @@ export default function SignUpPage() {
     <div className="flex min-h-screen flex-col">
       <div className="flex flex-1 flex-col items-center justify-center px-4 py-12">
         <div className="mx-auto w-full max-w-md space-y-6">
-          <div className="flex flex-col items-center space-y-2 text-center">
-            <Link href="/" className="flex items-center gap-2">
-              <Brain className="h-6 w-6 text-accent" />
-              <span className="text-xl font-bold">QuizMaster</span>
+
+          <div className="flex flex-col itemscenter space-y-2 text-center">
+          <Link href="/" className="flex items-center gap-2">
+              <Brain className="h-6 w-6 text-[#6C5CE7]" />
+              <span className="text-xl font-bold text-[#6C5CE7]">QuizMaster</span>
             </Link>
-            <h1 className="text-3xl font-bold">Create an account</h1>
-            <p className="text-muted-foreground">Enter your information to get started with QuizMaster</p>
+            <h1 className="text-3xl font-bold text-left">Create an account</h1>
+            <p className="text-muted-foreground text-left -my-2 mb-2">Enter your information to get started with QuizMaster</p>
           </div>
           <form
             // action={handleRegister}
@@ -90,7 +91,7 @@ export default function SignUpPage() {
               <Label htmlFor="password">Password</Label>
               <Input value={password} onChange={(e)=>setPassword(e.target.value)} id="password" name="password" type="password" placeholder="*******" required />
             </div>
-            <Button disabled={isLoading} type="submit" className="w-full">
+            <Button disabled={isLoading} type="submit" className="w-full bg-[#6C5CE7] hover:bg-[#8b82d1] text-white">
             {isLoading ? (
               <motion.div
                 animate={{ rotate: 360 }}
@@ -106,7 +107,7 @@ export default function SignUpPage() {
           <div className="space-y-4">
             <div className="text-center text-sm">
               Already have an account?{" "}
-              <Link href="/login" className="font-medium text-primary underline underline-offset-4">
+              <Link href="/login" className="font-medium text-[#6C5CE7] underline underline-offset-4">
                 Login
               </Link>
             </div>

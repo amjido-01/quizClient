@@ -60,6 +60,26 @@ export default function LandingPage() {
           </Link>
         </motion.div>
       </main>
+
+        <footer className="w-full border-t py-4 mt-10">
+              <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
+                <div className="flex items-center gap-2">
+                  <Brain className="h-5 w-5 text-primary" />
+                  <span className="font-semibold">QuizMaster</span>
+                </div>
+                <p className="text-center text-sm text-muted-foreground">
+                  © {new Date().getFullYear()} QuizMaster. All rights reserved.
+                </p>
+                <div className="flex gap-4">
+                  <Link href="/terms" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
+                    Terms
+                  </Link>
+                  <Link href="/privacy" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
+                    Privacy
+                  </Link>
+                </div>
+              </div>
+            </footer>
     </div>
   )
 }

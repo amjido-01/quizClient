@@ -21,12 +21,13 @@ import {
   Languages,
   Dumbbell,
   ArrowRight,
-  Slice,
 } from "lucide-react"
+import Footer from "@/components/ui/Footer"
 import { useAuthStore } from "@/hooks/use-auth"
 import QuizHeader from "@/components/ui/quiz-header"
 import api from "../api/axiosConfig"
 import { RecentQuiz } from "@/types"
+
 
 export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -129,7 +130,7 @@ export default function Dashboard() {
     <div className="flex min-h-screen flex-col">
       <QuizHeader user={user} />
 
-      <main className="flex-1">
+      <main className="flex-1 w-[95%] mx-auto">
         {/* Welcome Section */}
         <section className="py-8">
           <div className="containe mx-auto px-4 md:px-6">
@@ -151,13 +152,13 @@ export default function Dashboard() {
         {/* Search Section */}
         <section className="py-6 border-b">
           <div className="containe px-4 md:px-6">
-            <div className="mx-auto max-w-2xl">
+            <div className="mxauto ">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Search for quiz categories..."
-                  className="pl-10"
+                  className="pl-10 py-6"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -195,7 +196,7 @@ export default function Dashboard() {
                     >
                       {category.icon}
                     </div>
-                    <CardTitle className="text-lg">{category.name}</CardTitle>
+                    <CardTitle className="text-lg capitalize">{category.name}</CardTitle>
                   </CardHeader>
                   <CardContent className="p-4">
                     <CardDescription>
@@ -230,7 +231,7 @@ export default function Dashboard() {
             )}
 
             {/* Next Button */}
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-end">
               <Button
                 size="lg"
                 className="px-8 py-6 text-lg bg-[#6C5CE7] hover:bg-[#6C5CE7]/90 gap-2"
@@ -240,16 +241,6 @@ export default function Dashboard() {
                 Next <ArrowRight className="h-5 w-5" />
               </Button>
             </div>
-
-            {selectedCategory && (
-              <div className="mt-4 text-center text-sm text-muted-foreground">
-                You've selected{" "}
-                <span className="font-medium text-primary">
-                  {categories.find((c) => c.slug === selectedCategory)?.name}
-                </span>{" "}
-                as your quiz category
-              </div>
-            )}
           </div>
         </section>
 
@@ -331,25 +322,7 @@ export default function Dashboard() {
         </section>
       </main>
 
-      <footer className="w-full border-t py-6">
-        <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-          <div className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-primary" />
-            <span className="font-semibold">QuizMaster</span>
-          </div>
-          <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} QuizMaster. All rights reserved.
-          </p>
-          <div className="flex gap-4">
-            <Link href="/terms" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
-              Terms
-            </Link>
-            <Link href="/privacy" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
-              Privacy
-            </Link>
-          </div>
-        </div>
-      </footer>
+        <Footer />
     </div>
   )
 }

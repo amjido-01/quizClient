@@ -64,13 +64,17 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col">
       <div className="flex flex-1 flex-col items-center justify-center px-4 py-12">
         <div className="mx-auto w-full max-w-md space-y-6">
-          <div className="flex flex-col items-center space-y-2 text-center">
+
+          <div className="flex flex-col space-y-2 text-center">
+
             <Link href="/" className="flex items-center gap-2">
               <Brain className="h-6 w-6 text-[#6C5CE7]" />
               <span className="text-xl font-bold text-[#6C5CE7]">QuizMaster</span>
             </Link>
-            <h1 className="text-3xl font-bold">Welcome back</h1>
-            <p className="text-muted-foreground">
+
+            <h1 className="text-3xl text-left font-bold">Welcome back</h1>
+
+            <p className="text-muted-foreground -my-2 mb-2 text-left">
               Enter your credentials to access your account
             </p>
           </div>
