@@ -59,7 +59,6 @@ export async function registerAction(formData: FormData) {
     }
 
     const data = await response.json();
-    console.log("Registration data:", data);
     return { success: true, data: data };
 
   } catch (error) {

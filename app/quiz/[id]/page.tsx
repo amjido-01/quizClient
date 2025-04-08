@@ -5,8 +5,10 @@ import { useRouter, useParams } from "next/navigation"
 import { Brain, Clock, ArrowRight } from 'lucide-react'
 import { Progress } from "@/components/ui/progress";
 import withAuth from "@/components/ui/withAuth";
-
-
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
+import QuizHeader from "@/components/ui/quiz-header";
 export interface Question {
   id: string;
   quizId: string;
@@ -42,7 +44,6 @@ const QuizPage = () => {
         if (!response.ok) throw new Error("Failed to load quiz")
 
         const quizData = await response.json()
-        console.log(quizData, "hello")
         setQuiz(quizData)
       } catch (error) {
         console.error("Error fetching quiz:", error)
@@ -54,7 +55,6 @@ const QuizPage = () => {
     }
   }, [id])
 
-  console.log(quiz, "all")
   if (!quiz) {
     return (
       <div className="min-h-screen bg-[#F8F7FF] flex flex-col items-center justify-center">
@@ -65,7 +65,6 @@ const QuizPage = () => {
   }
 
   const currentQuestion = quiz?.questions[currentQuestionIndex]
-  console.log(currentQuestion)
   const progress = ((currentQuestionIndex + 1) / quiz.questions.length) * 100
 
   const handleAnswerSelect = (answer: string) => {
@@ -90,22 +89,31 @@ const QuizPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F7FF]">
       {/* Header */}
-      <header className="px-6 pt-6">
-        <div className="flex items-center justify-between max-w-3xl mx-auto">
-          <div className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-[#6C5CE7]" />
-            <span className="text-lg font-medium text-[#6C5CE7]">QuizMaster</span>
-          </div>
-          <div className="flex items-center gap-2 rounded-full bg-[#6C5CE7]/10 px-3 py-1.5">
+     <QuizHeader />
+
+      <main className="px-6 py-6 max-w-3xl mx-auto">
+
+      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-2 rounded-md bg-[#6C5CE7]/10 px-3 py-1.5">
             <Clock className="h-4 w-4 text-[#6C5CE7]" />
             <span className="text-sm font-medium text-[#6C5CE7]">30s</span>
           </div>
-        </div>
-      </header>
+          <div className="text-[#6C5CE7]">
+          <Link href="/dashboard">
+          <Button className={`flex items-center hover:bg-[#786eeb]  bg-[#6C5CE7] gap-2`}>
+        <X className="h-4 w-4" />
+      Exit Quiz
+    </Button>
+    </Link>
+          </div>
 
-      <main className="px-6 py-6 max-w-3xl mx-auto">
+
+      </div>
+
         {/* Quiz title */}
+        <div>
         <h1 className="text-2xl font-bold">{quiz.title}</h1>
+        </div>
         
         {/* Progress bar */}
         <div className="mt-4 mb-6 space-y-2">
@@ -113,7 +121,7 @@ const QuizPage = () => {
             <span className="text-gray-500">Question {currentQuestionIndex + 1} of {quiz.questions.length}</span>
             <span className="font-medium">Score: {score}</span>
           </div>
-          <Progress value={progress} className="h-2 bg-gray-200">
+          <Progress value={progress} className="h-2  bg-gray-200">
             <div 
               className="h-full bg-[#6C5CE7] rounded-full transition-all duration-300" 
               style={{ width: `${progress}%` }}

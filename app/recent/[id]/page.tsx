@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect, use } from "react"
+import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import withAuth from "@/components/ui/withAuth"
 import {
@@ -18,19 +18,17 @@ import {
   XCircle,
   Clock,
   ArrowLeft,
-  ChevronDown,
-  ChevronUp,
-  Brain,
 } from "lucide-react"
 import QuizHeader from "@/components/ui/quiz-header"
 import { useAuthStore } from "@/hooks/use-auth"
 import api from "@/app/api/axiosConfig"
+// import { RecentQuiz } from "@/types"
 const Page = () => {
   const {id} = useParams()
   const router = useRouter()
   const {user} = useAuthStore()
-  const [activeTab, setActiveTab] = useState("summary")
-  const [expandedQuestions, setExpandedQuestions] = useState<number[]>([])
+//   const [activeTab, setActiveTab] = useState("summary")
+//   const [expandedQuestions, setExpandedQuestions] = useState<number[]>([])
   const [quizData, setQuizData] = useState<any>(null)
 
 
@@ -42,7 +40,6 @@ const Page = () => {
         // For now, we'll simulate a delay and use mock data
         const response = await api.get(`/recent/${id}`)
         const data = response.data
-        console.log(response.data, "from recent")
 
         if (data) {
           setQuizData(data)
@@ -60,13 +57,13 @@ const Page = () => {
 
 
 
-  const toggleQuestionExpand = (index: number) => {
-    if (expandedQuestions.includes(index)) {
-      setExpandedQuestions(expandedQuestions.filter((i) => i !== index))
-    } else {
-      setExpandedQuestions([...expandedQuestions, index])
-    }
-  }
+//   const toggleQuestionExpand = (index: number) => {
+//     if (expandedQuestions.includes(index)) {
+//       setExpandedQuestions(expandedQuestions.filter((i) => i !== index))
+//     } else {
+//       setExpandedQuestions([...expandedQuestions, index])
+//     }
+//   }
 
   const handleRetakeQuiz = () => {
     if (!quizData) return

@@ -1,11 +1,10 @@
 "use client"
 
-import { useState, useEffect, use } from "react"
+import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
-  Brain,
   Trophy,
   Shield,
   Zap,
@@ -34,9 +33,9 @@ export default function SubcategorySelection() {
   const [categoryName, setCategoryName] = useState<string>("")
   const [subcategories, setSubcategories] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-
+  console.log(loading)
   useEffect(() => {
-    // Get the category name from the slug and fetch subcategories
+    // Get the category name from the slug and fetch subcategories 
     if (category) {
       setCategoryName(category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, " "))
       fetchSubcategories(category)
@@ -51,7 +50,6 @@ export default function SubcategorySelection() {
       const response = await fetch(`http://localhost:8080/api/v1/quizzes/subcategories?category=${categorySlug}`)
       if (response.ok) {
         const data = await response.json()
-        console.log(data, "hello")
         setSubcategories(
           data.subcategories.map((sub: string) => ({
             name: sub,
@@ -112,7 +110,6 @@ export default function SubcategorySelection() {
   // }
 
   const handleStartQuiz = async () => {
-    console.log(category, selectedDifficulty, selectedSubcategory);
     if (!category || !selectedSubcategory || !selectedDifficulty) return;
   
     try {
@@ -120,13 +117,11 @@ export default function SubcategorySelection() {
         `http://localhost:8080/api/v1/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`
       );
       
-      console.log(response, "kaiiiii")
       if (!response.ok) {
         throw new Error("Failed to fetch quiz questions");
       }
   
       const quizData = await response.json();
-      console.log(quizData, "wetin")
   
       if (!quizData || quizData.length === 0) {
         console.error("No quiz data available");
@@ -149,7 +144,6 @@ export default function SubcategorySelection() {
       }
   
       const attemptData = await attemptResponse.json();
-      console.log(attemptData, 'attempt')
   
       // Navigate to the quiz page with the attempt ID
       router.push(`/quiz/${quizId}?attemptId=${attemptData.id}`);

@@ -16,7 +16,7 @@ import { Brain } from 'lucide-react'
 import {User} from "@/types/index"
 
 interface QuizHeaderProps {
-  user: User | null; // Use the imported UserData interface
+  user?: User | null; // Use the imported UserData interface
 }
 
 export default function QuizHeader({user}: QuizHeaderProps) {

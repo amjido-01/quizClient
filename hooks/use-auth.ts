@@ -30,7 +30,6 @@ export const useAuthStore = create(
       register: async (username: string, email: string, password: string) => {
         try {
           const response = await api.post('/auth/register', { username, email, password })
-          console.log(response, "from register")
           const { user, accessToken, refreshToken } = response.data.responseBody
           set({ user, accessToken, refreshToken })
           api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
@@ -47,11 +46,10 @@ export const useAuthStore = create(
         try {
           const response = await api.post("/auth/login", { email, password });
           const { accessToken, refreshToken, responseBody } = response.data;
-          console.log(response.data, "refresh token......");
+          console.log(refreshToken)
 
           set({ accessToken, user: responseBody });
           api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-          console.log(accessToken, ".....")
           
         } catch (error) {
           console.error("Login failed:", error);
@@ -72,7 +70,6 @@ export const useAuthStore = create(
         }
         try {
           const response = await api.get("/profile");
-          console.log(response, "res")
           const { user } = response.data;
           set({user});
           return true
@@ -87,7 +84,6 @@ export const useAuthStore = create(
         try {
           const response = await api.post("/refresh-token");
           const { accessToken } = response.data;
-          console.log(accessToken, "refreshtoken")
 
           set({ accessToken });
           api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
@@ -99,7 +95,6 @@ export const useAuthStore = create(
       },
 
       logout: async () => {
-        console.log("log out...")
         try {
           await api.post("/auth/logout");
         } catch (error) {

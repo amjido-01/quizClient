@@ -2,7 +2,7 @@
 import { useSearchParams, useParams } from "next/navigation"
 import Link from "next/link"
 import { Brain, Trophy, ArrowRight, Home, RotateCcw } from "lucide-react"
-
+import { Suspense } from "react"
 export default function ResultPage() {
   const searchParams = useSearchParams()
   const { id } = useParams()
@@ -30,6 +30,7 @@ export default function ResultPage() {
       </header>
 
       <main className="px-6 mt-10 flex flex-col items-center text-center">
+        <Suspense fallback={<div>Loading...</div>}>
         <div className="mb-8">
           <div className="relative flex h-32 w-32 items-center justify-center rounded-full border-8 border-[#6C5CE7]/20">
             <Trophy className="h-12 w-12 text-[#6C5CE7]" />
@@ -73,6 +74,7 @@ export default function ResultPage() {
             </Link>
           </div>
         </div>
+        </Suspense>
       </main>
     </div>
   )

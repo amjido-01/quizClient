@@ -3,11 +3,10 @@
 import { type JSX, useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation"
 import {
-  Brain,
   Code,
   Globe,
   History,
@@ -40,7 +39,6 @@ export default function Dashboard() {
   const router = useRouter()
   const {user} = useAuthStore()
 
-  console.log(user, "from use")
 
   // Fetch categories from backend
   useEffect(() => {
@@ -48,7 +46,6 @@ export default function Dashboard() {
       try {
         const response = await api.get("/quizzes/categories")
         const data = await response.data
-        console.log(data, "data from dashboard")
         const categoryIcons: Record<string, JSX.Element> = {
           math: <Calculator className="h-5 w-5" />,
           science: <Science className="h-5 w-5" />,
@@ -105,7 +102,6 @@ export default function Dashboard() {
   }, [user?.id]); // Refetch when user ID changes
   
 
-  console.log(recentQuizzes, "recents")
 
   // Filter categories based on search query
   const filteredCategories = categories.filter(
@@ -122,7 +118,6 @@ export default function Dashboard() {
   }
 
   const handleCategorySelection = (slug: string) => {
-    console.log("Selecting category with slug:", slug)
     setSelectedCategory(slug)
   }
 
@@ -186,7 +181,7 @@ export default function Dashboard() {
                   }`}
                   onClick={() => handleCategorySelection(category.slug)}
                 >
-                  <CardHeader className="p-4 bg-muted/50 flex flex-row items-center gap-3">
+                  <CardHeader className="px-4 bg-muted/50 flex flex-row items-center gap-3">
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-full ${
                         selectedCategory === category.slug
@@ -198,7 +193,7 @@ export default function Dashboard() {
                     </div>
                     <CardTitle className="text-lg capitalize">{category.name}</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-4">
+                  <CardContent className="px-4">
                     <CardDescription>
                       {category.description || `Test your knowledge in ${category.name}`}
                     </CardDescription>
