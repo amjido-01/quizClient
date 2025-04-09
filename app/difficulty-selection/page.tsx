@@ -23,6 +23,9 @@ import {
 import QuizHeader from "@/components/ui/quiz-header"
 import { useAuthStore } from "@/hooks/use-auth"
 import Footer from "@/components/ui/Footer"
+import api from "../api/axiosConfig"
+
+
 export default function SubcategorySelection() {
   const router = useRouter()
   const {user} = useAuthStore()

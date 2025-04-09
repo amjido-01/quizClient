@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from "@/hooks/use-auth";
 
-const BASE_URL = "https://quiz-backend-api-o7y3.onrender.com";
+const BASE_URL = "https://quiz-backend-api-o7y3.onrender.com/api/v1";
 // const BASE_URL = "http://localhost:8080/api/v1";
 
 const api = axios.create({
