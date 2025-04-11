@@ -303,21 +303,3 @@ const Dashboard = () => {
 
 export default withAuth(Dashboard)
 
-const achievements = [
-  {
-    title: "Science Expert",
-    description: "Completed 10 science quizzes with 80%+ score",
-    icon: <Science className="h-4 w-4" />,
-  },
-  {
-    title: "Quick Thinker",
-    description: "Completed a quiz in under 5 minutes with 90%+ score",
-    icon: <Lightbulb className="h-4 w-4" />,
-  },
-  {
-    title: "Knowledge Explorer",
-    description: "Attempted quizzes in 5 different categories",
-    icon: <Globe className="h-4 w-4" />,
-  },
-]
-
