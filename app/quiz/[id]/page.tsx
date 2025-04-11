@@ -9,24 +9,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import QuizHeader from "@/components/ui/quiz-header";
-export interface Question {
-  id: string;
-  quizId: string;
-  text: string;
-  type: string;
-  options: string[];
-  correctAnswer: string;
-  createdAt: string;
-}
-
-export interface Quiz {
-  id: string;
-  title: string;
-  topicId: string;
-  difficulty: "easy" | "medium" | "hard";
-  createdAt: string;
-  questions: Question[];
-}
+import { Quiz } from "@/types";
+import api from "@/app/api/axiosConfig";
 
 
 const QuizPage = () => {
@@ -40,10 +24,10 @@ const QuizPage = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/quizzes/${id}`)
-        if (!response.ok) throw new Error("Failed to load quiz")
+        const response = await api.get(`http://localhost:8080/api/v1/quizzes/${id}`)
+        if (!response.data) throw new Error("Failed to load quiz")
 
-        const quizData = await response.json()
+        const quizData = await response.data
         setQuiz(quizData)
       } catch (error) {
         console.error("Error fetching quiz:", error)

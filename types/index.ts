@@ -17,3 +17,21 @@ export interface User {
     date: string; // or `Date` if you're converting it on the frontend
   }
   
+  export interface Question {
+    id: string;
+    quizId: string;
+    text: string;
+    type: string;
+    options: string[];
+    correctAnswer: string;
+    createdAt: string;
+  }
+  
+  export interface Quiz {
+    id: string;
+    title: string;
+    topicId: string;
+    difficulty: "easy" | "medium" | "hard";
+    createdAt: string;
+    questions: Question[];
+  }

@@ -23,7 +23,7 @@ import {
 import QuizHeader from "@/components/ui/quiz-header"
 import { useAuthStore } from "@/hooks/use-auth"
 import Footer from "@/components/ui/Footer"
-// import api from "../api/axiosConfig"
+import api from "../api/axiosConfig"
 
 
 export default function SubcategorySelection() {
@@ -50,9 +50,9 @@ export default function SubcategorySelection() {
     try {
       // In a real app, you would fetch subcategories from an API
       // For now, we'll use our predefined subcategories
-      const response = await fetch(`http://localhost:8080/api/v1/quizzes/subcategories?category=${categorySlug}`)
-      if (response.ok) {
-        const data = await response.json()
+      const response = await api.get(`http://localhost:8080/api/v1/quizzes/subcategories?category=${categorySlug}`)
+      if (response.data) {
+        const data = await response.data
         setSubcategories(
           data.subcategories.map((sub: string) => ({
             name: sub,
@@ -116,15 +116,15 @@ export default function SubcategorySelection() {
     if (!category || !selectedSubcategory || !selectedDifficulty) return;
   
     try {
-      const response = await fetch(
+      const response = await api.get(
         `http://localhost:8080/api/v1/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`
       );
       
-      if (!response.ok) {
+      if (!response.data) {
         throw new Error("Failed to fetch quiz questions");
       }
   
-      const quizData = await response.json();
+      const quizData = await response.data;
   
       if (!quizData || quizData.length === 0) {
         console.error("No quiz data available");
@@ -134,19 +134,12 @@ export default function SubcategorySelection() {
       const quizId = quizData[0].id;
   
       // Create quiz attempt
-      const attemptResponse = await fetch("http://localhost:8080/api/v1/attempt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: user?.id, quizId }),
+      const attemptResponse = await api.post("http://localhost:8080/api/v1/attempt", {
+         userId: user?.id, 
+         quizId,
       });
   
-      if (!attemptResponse.ok) {
-        throw new Error("Failed to create quiz attempt");
-      }
-  
-      const attemptData = await attemptResponse.json();
+      const attemptData = await attemptResponse.data;
   
       // Navigate to the quiz page with the attempt ID
       router.push(`/quiz/${quizId}?attemptId=${attemptData.id}`);
