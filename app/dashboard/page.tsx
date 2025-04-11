@@ -10,7 +10,6 @@ import {
   Code,
   Globe,
   History,
-  Lightbulb,
   Music,
   Palette,
   Search,
