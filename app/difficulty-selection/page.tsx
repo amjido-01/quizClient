@@ -50,7 +50,7 @@ export default function SubcategorySelection() {
     try {
       // In a real app, you would fetch subcategories from an API
       // For now, we'll use our predefined subcategories
-      const response = await api.get(`http://localhost:8080/api/v1/quizzes/subcategories?category=${categorySlug}`)
+      const response = await api.get(`/quizzes/subcategories?category=${categorySlug}`)
       if (response.data) {
         const data = await response.data
         setSubcategories(
@@ -117,7 +117,7 @@ export default function SubcategorySelection() {
   
     try {
       const response = await api.get(
-        `http://localhost:8080/api/v1/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`
+        `/quizzes?category=${category}&subcategory=${selectedSubcategory}&difficulty=${selectedDifficulty}`
       );
       
       if (!response.data) {
@@ -134,7 +134,7 @@ export default function SubcategorySelection() {
       const quizId = quizData[0].id;
   
       // Create quiz attempt
-      const attemptResponse = await api.post("http://localhost:8080/api/v1/attempt", {
+      const attemptResponse = await api.post("/attempt", {
          userId: user?.id, 
          quizId,
       });

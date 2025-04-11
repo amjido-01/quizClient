@@ -176,12 +176,12 @@ export default function Dashboard() {
                   key={`category-${index}-${category.slug}`}
                   className={`cursor-pointer transition-all duration-200 ${
                     selectedCategory === category.slug
-                      ? "border-primary bg-primary/5 shadow-md"
+                      ? "border-[#6C5CE7] bg-[#dee0fd] shadow-md"
                       : "hover:border-primary/30 hover:shadow-sm"
                   }`}
                   onClick={() => handleCategorySelection(category.slug)}
                 >
-                  <CardHeader className="px-4 bg-muted/50 flex flex-row items-center gap-3">
+                  <CardHeader className="px-4 flex flex-row items-center gap-3">
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-full ${
                         selectedCategory === category.slug
@@ -247,7 +247,7 @@ export default function Dashboard() {
               <p className="text-muted-foreground">Your recent quiz attempts and achievements</p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-1">
               <Card>
                 <CardHeader>
                   <CardTitle>Recent Quizzes</CardTitle>
@@ -290,27 +290,6 @@ export default function Dashboard() {
                     ))}
                   </div>
                 </CardContent>)}
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Achievements</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {achievements.map((achievement, index) => (
-                      <div key={index} className="flex items-center gap-4 rounded-lg border p-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-[#6C5CE7]">
-                          {achievement.icon}
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-medium">{achievement.title}</p>
-                          <p className="text-sm text-muted-foreground">{achievement.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
               </Card>
             </div>
           </div>

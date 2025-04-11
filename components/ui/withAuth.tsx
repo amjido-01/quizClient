@@ -25,7 +25,7 @@ const withAuth = <P extends object>(Component: React.ComponentType<P>) => {
 
     if (isLoading) {
       return (
-        <div className="flex items-center justify-center text-white bg-[#000000] h-screen w-full">
+        <div className="flex items-center justify-center text-white bg-[#b3a9fa] h-screen w-full">
             <div className="flex items-center gap-2">
             <motion.div
                 animate={{ rotate: 360 }}

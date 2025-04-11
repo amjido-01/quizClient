@@ -24,7 +24,7 @@ const QuizPage = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const response = await api.get(`http://localhost:8080/api/v1/quizzes/${id}`)
+        const response = await api.get(`/quizzes/${id}`)
         if (!response.data) throw new Error("Failed to load quiz")
 
         const quizData = await response.data
