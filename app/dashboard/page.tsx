@@ -26,9 +26,9 @@ import { useAuthStore } from "@/hooks/use-auth"
 import QuizHeader from "@/components/ui/quiz-header"
 import api from "../api/axiosConfig"
 import { RecentQuiz } from "@/types"
+import withAuth from "@/components/ui/withAuth"
 
-
-export default function Dashboard() {
+const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [categories, setCategories] = useState<
@@ -301,6 +301,7 @@ export default function Dashboard() {
   )
 }
 
+export default withAuth(Dashboard)
 
 const achievements = [
   {
