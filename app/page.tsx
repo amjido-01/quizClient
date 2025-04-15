@@ -13,7 +13,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-[#F8F7FF]">
       {/* Header with logo and auth buttons */}
       <header className="border-2 p-4">
-        <div className="flex items-center w-[90%] mx-auto justify-between">
+        <div className="flex items-center w-[95%] mx-auto justify-between">
           <div className="flex items-center gap-2">
             <Brain className="h-6 w-6 text-[#6C5CE7]" />
             <span className="text-xl font-medium text-[#6C5CE7]">QuizMaster</span>
