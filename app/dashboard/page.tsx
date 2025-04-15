@@ -128,14 +128,14 @@ const Dashboard = () => {
 
       <main className="flex-1 w-[95%] mx-auto">
         {/* Welcome Section */}
-        <section className="py-8">
+        <section className="pt-8 md:py-8">
           <div className="containe mx-auto px-4 md:px-6">
             <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
               <div>
                 <h1 className="text-xl md:text-3xl font-bold capitalize">Welcome back, {user?.username.trim().split(" ")[0]}</h1>
                 <p className="text-muted-foreground">Ready to challenge your knowledge today?</p>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center md:gap-4">
               
                 <div className="flex items-center gap-1 rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">
                   <span>125 Points</span>
@@ -146,7 +146,7 @@ const Dashboard = () => {
         </section>
 
         {/* Search Section */}
-        <section className="py-6 border-b">
+        <section className="md:py-6 border-b">
           <div className="containe px-4 md:px-6">
             <div className="mxauto ">
               <div className="relative">
@@ -167,7 +167,7 @@ const Dashboard = () => {
         <section className="py-12">
           <div className="containe px-4 md:px-6">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold">Quiz Categories</h2>
+              <h2 className="text-xl md:text-2xl font-bold">Quiz Categories</h2>
               <p className="text-muted-foreground">Select a category to test your knowledge</p>
             </div>
 

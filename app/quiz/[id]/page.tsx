@@ -23,7 +23,7 @@ const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>([])
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(200);
+  const [timeLeft, setTimeLeft] = useState(300);
   const [isTimeUpDialogOpen, setIsTimeUpDialogOpen] = useState(false)
 
 
@@ -47,9 +47,6 @@ const QuizPage = () => {
   useEffect(() => {
     if (timeLeft <= 0) {
       setIsTimeUpDialogOpen(true)
-      // const finalAnswer = selectedAnswers[currentQuestionIndex];
-      // const finalScore = finalAnswer === currentQuestion.correctAnswer ? score + 1 : score;
-      // router.push(`/quiz/${id}/result?score=${finalScore}&total=${quiz?.questions.length}`);
       return;
     }
   
@@ -127,7 +124,6 @@ const QuizPage = () => {
         <div className="mt-4 mb-6 space-y-2">
           <div className="flex items-center justify-between text-sm">
             <span className="text-gray-500">Question {currentQuestionIndex + 1} of {quiz.questions.length}</span>
-            <span className="font-medium">Score: {score}</span>
           </div>
           <Progress value={progress} className="h-2 bg-gray-200" />
         </div>

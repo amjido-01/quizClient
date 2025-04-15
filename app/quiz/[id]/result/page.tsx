@@ -54,7 +54,7 @@ export default function ResultPage() {
           </div>
 
           <div className="space-y-3 mb-5 pt-4 ">
-           <div className="md:flex gap-1">
+           <div className="flex flex-col md:flex-row gap-2 md:gap-1">
            <Link href={`/quiz/${id}`}>
               <button className="w-full flex items-center justify-center gap-2 rounded-lg border border-[#6C5CE7] bg-white px-4 py-3 font-medium text-[#6C5CE7] transition-all hover:bg-[#6C5CE7]/5">
                 <RotateCcw className="h-4 w-4" /> Try Again
