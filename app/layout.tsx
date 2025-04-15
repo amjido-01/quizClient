@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Quiz Master",
   description: "Quiz app for students",
+  icons: {
+    icon: [{ url: "/brain.svg" }],
+  },
 };
 
 export default function RootLayout({
