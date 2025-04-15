@@ -120,6 +120,8 @@ const Dashboard = () => {
     setSelectedCategory(slug)
   }
 
+  
+
   return (
     <div className="flex min-h-screen flex-col">
       <QuizHeader user={user} />
@@ -130,7 +132,7 @@ const Dashboard = () => {
           <div className="containe mx-auto px-4 md:px-6">
             <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
               <div>
-                <h1 className="text-3xl font-bold capitalize">Welcome back, {user?.username}</h1>
+                <h1 className="text-xl md:text-3xl font-bold capitalize">Welcome back, {user?.username.trim().split(" ")[0]}</h1>
                 <p className="text-muted-foreground">Ready to challenge your knowledge today?</p>
               </div>
               <div className="flex items-center gap-4">
@@ -169,7 +171,7 @@ const Dashboard = () => {
               <p className="text-muted-foreground">Select a category to test your knowledge</p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-2 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {filteredCategories.map((category, index) => (
                 <Card
                   key={`category-${index}-${category.slug}`}
@@ -246,7 +248,7 @@ const Dashboard = () => {
               <p className="text-muted-foreground">Your recent quiz attempts and achievements</p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-1">
+            <div className="grid gap-2 md:gap-6 md:grid-cols-1">
               <Card>
                 <CardHeader>
                   <CardTitle>Recent Quizzes</CardTitle>
@@ -256,7 +258,7 @@ const Dashboard = () => {
                   You haven't taken any quizzes yet.
                   </p>
         </div>)  : (<CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-2 md:space-y-4">
                     {recentQuizzes.map((quiz, index) => (
                       <div key={index} className="flex items-center gap-4 rounded-lg border p-3">
                         <div

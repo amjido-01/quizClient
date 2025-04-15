@@ -37,6 +37,14 @@ export default function QuizHeader({user}: QuizHeaderProps) {
     await logout()
     router.push('/login')
   }
+
+  const handleCategories = async () => {
+    router.push("/categories")
+  }
+  const handleLeaderBoard = async () => {
+    router.push("/leaderboard")
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex py-4 px-8 h-16 items-center justify-between">
@@ -45,12 +53,6 @@ export default function QuizHeader({user}: QuizHeaderProps) {
           <span className="text-xl text-[#6C5CE7] font-bold">QuizMaster</span>
         </Link>
         <div className="flex items-center gap-4">
-          <Link href="/categories">
-            <Button variant="ghost">Categories</Button>
-          </Link>
-          <Link href="/leaderboard">
-            <Button variant="ghost">Leaderboard</Button>
-          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
@@ -63,14 +65,13 @@ export default function QuizHeader({user}: QuizHeaderProps) {
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">John Doe</p>
-                  <p className="text-xs leading-none text-muted-foreground">john.doe@example.com</p>
+                  <p className="text-sm font-medium leading-none">{user?.username}</p>
+                  <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>My Quizzes</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleCategories} >Categories</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLeaderBoard}>Leaderboard</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>Log out</DropdownMenuItem>
             </DropdownMenuContent>

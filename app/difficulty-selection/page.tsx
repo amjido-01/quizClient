@@ -188,7 +188,7 @@ const SubcategorySelection = () => {
             </Button>
 
             <div className="mb-6">
-              <h1 className="text-3xl font-bold">{categoryName}</h1>
+              <h1 className="text-2xl md:text-3xl font-bold">{categoryName}</h1>
               <p className="text-muted-foreground">Select a topic and difficulty level to start your quiz</p>
             </div>
           </div>
@@ -198,11 +198,11 @@ const SubcategorySelection = () => {
         <section className="py-8 border-b">
           <div className="containe px-4 md:px-6">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold">Select Topic</h2>
+              <h2 className="text-xl md:text-2xl font-bold">Select Topic</h2>
               <p className="text-muted-foreground">Choose a specific area to test your knowledge</p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-2 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {subcategories.map((subcategory) => (
                 <Card
                   key={subcategory.slug}
@@ -225,10 +225,10 @@ const SubcategorySelection = () => {
                     </div>
                     <CardTitle className="text-lg">{subcategory.name}</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-4">
+                  {/* <CardContent className="p-4">
                     <CardDescription>{subcategory.description}</CardDescription>
                   </CardContent>
-                  
+                   */}
                 </Card>
               ))}
             </div>
@@ -239,11 +239,11 @@ const SubcategorySelection = () => {
         <section className="py-8">
           <div className="containe px-4 md:px-6">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold">Select Difficulty Level</h2>
+              <h2 className="text-xl md:text-2xl font-bold">Select Difficulty Level</h2>
               <p className="text-muted-foreground">Choose how challenging you want your quiz to be</p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-2 md:gap-6 sm:grid-cols-3">
               {difficulties.map((difficulty) => (
                 <Card
                   key={difficulty.level}
@@ -266,9 +266,9 @@ const SubcategorySelection = () => {
                     </div>
                     <CardTitle className="text-lg">{difficulty.name}</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-4 pt-0">
+                  {/* <CardContent className="p-4 pt-0">
                     <CardDescription>{difficulty.description}</CardDescription>
-                  </CardContent>
+                  </CardContent> */}
                 </Card>
               ))}
             </div>

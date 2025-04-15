@@ -18,14 +18,14 @@ export default function LandingPage() {
             <Brain className="h-6 w-6 text-[#6C5CE7]" />
             <span className="text-xl font-medium text-[#6C5CE7]">QuizMaster</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 md:gap-3">
             <Link href="/login">
-              <Button variant="ghost" className="text-[#6C5CE7] font-bold hover:text-[#8b82d1] hover:bg-primary/5">
+              <Button variant="ghost" className="text-[#6C5CE7] md:font-bold hover:text-[#8b82d1] hover:bg-primary/5">
                 Login
               </Button>
             </Link>
             <Link href="/register">
-              <Button className="bg-[#6C5CE7] font-bold hover:bg-[#8b82d1] text-white">Sign Up</Button>
+              <Button className="bg-[#6C5CE7] md:font-bold hover:bg-[#8b82d1] text-white">Sign Up</Button>
             </Link>
           </div>
         </div>
